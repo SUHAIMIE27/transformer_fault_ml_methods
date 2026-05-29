@@ -1,0 +1,25 @@
+# 8-10 Minute Presentation Script
+
+Good day everyone. My individual coursework project is titled **Transformer Fault Diagnosis ML Methods Classification**.
+
+The purpose of this project is to reorganize a machine-learning workflow into a proper Python repository. My dataset contains Scopus records related to power-transformer fault diagnosis and dissolved gas analysis. Each record includes a title, year, abstract, keywords, and an extracted summary of the machine-learning methods mentioned in the paper.
+
+First, I checked the dataset and found that the `Screening decision` column contains only one class, which is `Keep`. Since a model cannot learn a useful classifier from only one class, I created a more meaningful target variable called `target_category`. This target is derived from the first extracted machine-learning method category in the `output abstract extraction` column.
+
+The workflow starts in `main.py`. This file connects every module together. The first module is `data_loader.py`, where I created a `DatasetLoader` class to load the Excel file and validate the important columns. This improves reliability because the program will stop early if required columns are missing.
+
+Next is the preprocessing stage. In `preprocessing.py`, the `MethodExtractionParser` parses the JSON-like extraction column, while `TransformerFaultPreprocessor` cleans missing text, combines the title, abstract, and keywords, and creates the target category. I also normalised similar method categories into broader groups such as Neural Network / Deep Learning, Ensemble Learning, Supervised Learning, Optimization, and Statistical / Feature Methods.
+
+For feature engineering, I used TF-IDF. This converts text into numeric features based on word importance. In `feature_engineering.py`, I used an abstract base class called `TextFeatureBuilder` and an inherited class called `TfidfFeatureBuilder`. This demonstrates abstraction and inheritance.
+
+For model training, I used Linear SVM because it is suitable for text classification with TF-IDF features and is easy to explain. In `train_model.py`, I created a base trainer class and an inherited classifier trainer. The model splits the dataset into training and testing sets, trains the classifier, and predicts the target category.
+
+For evaluation, `evaluate.py` calculates accuracy, macro F1-score, weighted F1-score, classification report, and confusion matrix. The project also saves visual outputs, including publication trend by year, category distribution, top extracted methods, and confusion matrix.
+
+For testing, I created unit tests inside the `tests` folder. These tests check data loading, preprocessing, feature engineering, model training, and evaluation. This helps prove that the code is reliable and modular.
+
+In terms of object-oriented programming, this project uses classes such as `DatasetLoader`, `TransformerFaultPreprocessor`, and `MLCategoryClassifierTrainer`. It uses abstraction through the base classes, inheritance through the TF-IDF feature builder and classifier trainer, and encapsulation because each class keeps related logic together.
+
+To run the project, the user only needs to install the requirements, run `python main.py`, and then run `pytest`. The project is also prepared with a `.devcontainer` folder so it can run in GitHub Codespaces.
+
+In conclusion, this project takes a raw research dataset and turns it into a structured, modular machine-learning repository with preprocessing, training, evaluation, visualization, testing, and documentation.
