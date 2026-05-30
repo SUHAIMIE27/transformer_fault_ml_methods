@@ -8,27 +8,32 @@ It loads a dataset of transformer-fault literature, preprocesses it, trains a cl
 
 ## Folder Structure
 transformer_fault_ml_methods/
-├── main.py # Orchestrates full pipeline
-├── config.py # Project configuration (paths, settings)
+├── main.py                     # Orchestrates the full ML pipeline
+├── config.py                   # Project configuration (paths, settings)
 ├── data/
-│   ├── raw/ # Original Excel dataset
+│   ├── raw/                    # Original Excel dataset
 │   │   └── relevant_transformer_fault_diagnosis.xlsx
 │   └── processed_transformer_fault_records.csv
 ├── outputs/
-│   ├── figures/ # Plots (category distribution, confusion matrix, top methods, publications by year)
-│   ├── metrics/ # Metrics JSON and pipeline summary
-│   └── model/ # Trained models
+│   ├── figures/                # Plots: category distribution, confusion matrix, top methods, publications by year
+│   ├── metrics/                # Metrics JSON and pipeline summary
+│   └── model/                  # Trained models (joblib)
 ├── src/
-│   ├── data/data_loader.py
-│   ├── models/train_model.py
-│   ├── preprocessing/preprocessing.py
-│   ├── preprocessing/feature_engineering.py
-│   ├── evaluation/evaluate.py
+│   ├── data/
+│   │   └── data_loader.py
+│   ├── models/
+│   │   └── train_model.py
+│   ├── preprocessing/
+│   │   ├── preprocessing.py
+│   │   └── feature_engineering.py
+│   ├── evaluation/
+│   │   └── evaluate.py
 │   └── utils/
 │       ├── reporting.py
 │       └── visualization.py
 ├── tests/
-│   └── test_train_model.py
+│   ├── test_train_model.py
+│   └── test_main.py
 ├── README.md
 ├── DECOMPOSITION_REPORT.md
 ├── PRESENTATION_SCRIPT.md
@@ -37,8 +42,6 @@ transformer_fault_ml_methods/
 ---
 
 ## Code Explanation
-
-The project is structured modularly. Here's what each module does:
 
 ### 1. `main.py`
 - Orchestrates the entire ML pipeline.
@@ -90,7 +93,7 @@ The project is structured modularly. Here's what each module does:
 ### 9. `tests/`
 - Contains unit tests for core modules:
   - `test_train_model.py` → ensures `train_model()` runs and outputs a classifier and vectorizer.
-  - `test_main.py` → optional minimal tests for pipeline integrity.
+  - `test_main.py` → minimal pipeline integrity tests.
 
 ---
 
@@ -108,8 +111,15 @@ The project is structured modularly. Here's what each module does:
 
 ## Installation & Setup
 
-1. Extract the ZIP file.
-2. Install dependencies:
+1. Clone the repository:
 
 ```bash
-pip install -r requirements.txt
+git clone https://github.com/SUHAIMIE27/transformer_fault_ml_methods.git
+cd transformer_fault_ml_methods
+
+## Dataset
+
+The dataset used for this project can be downloaded here:
+
+📥 **Transformer Fault Diagnosis Dataset (Kaggle)**  
+🔗 https://www.kaggle.com/datasets/shashwatwork/failure-analysis-in-power-transformers-dataset?resource=download
